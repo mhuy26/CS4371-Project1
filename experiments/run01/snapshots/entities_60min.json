@@ -1,0 +1,1421 @@
+{
+  "experiment_started_at": "2026-10-24T00:45:24Z",
+  "captured_at": "2026-10-24T01:46:25.252562+00:00",
+  "elapsed_minutes": 60,
+  "processed_messages": 405,
+  "total_mentions": 393,
+  "top_10": [
+    {
+      "entity": "AI",
+      "label": "GPE",
+      "count": 25
+    },
+    {
+      "entity": "Apple",
+      "label": "ORG",
+      "count": 14
+    },
+    {
+      "entity": "Google",
+      "label": "ORG",
+      "count": 10
+    },
+    {
+      "entity": "AI",
+      "label": "ORG",
+      "count": 5
+    },
+    {
+      "entity": "Reed",
+      "label": "PERSON",
+      "count": 5
+    },
+    {
+      "entity": "Chinese",
+      "label": "NORP",
+      "count": 4
+    },
+    {
+      "entity": "City Hall",
+      "label": "FAC",
+      "count": 4
+    },
+    {
+      "entity": "MacBook",
+      "label": "ORG",
+      "count": 4
+    },
+    {
+      "entity": "iPod",
+      "label": "ORG",
+      "count": 4
+    },
+    {
+      "entity": "API",
+      "label": "ORG",
+      "count": 3
+    }
+  ],
+  "all_entities": [
+    {
+      "entity": "AI",
+      "label": "GPE",
+      "count": 25
+    },
+    {
+      "entity": "Apple",
+      "label": "ORG",
+      "count": 14
+    },
+    {
+      "entity": "Google",
+      "label": "ORG",
+      "count": 10
+    },
+    {
+      "entity": "AI",
+      "label": "ORG",
+      "count": 5
+    },
+    {
+      "entity": "Reed",
+      "label": "PERSON",
+      "count": 5
+    },
+    {
+      "entity": "Chinese",
+      "label": "NORP",
+      "count": 4
+    },
+    {
+      "entity": "City Hall",
+      "label": "FAC",
+      "count": 4
+    },
+    {
+      "entity": "MacBook",
+      "label": "ORG",
+      "count": 4
+    },
+    {
+      "entity": "iPod",
+      "label": "ORG",
+      "count": 4
+    },
+    {
+      "entity": "API",
+      "label": "ORG",
+      "count": 3
+    },
+    {
+      "entity": "CH",
+      "label": "ORG",
+      "count": 3
+    },
+    {
+      "entity": "CTA",
+      "label": "ORG",
+      "count": 3
+    },
+    {
+      "entity": "California",
+      "label": "GPE",
+      "count": 3
+    },
+    {
+      "entity": "Canadians",
+      "label": "NORP",
+      "count": 3
+    },
+    {
+      "entity": "ClickHouse",
+      "label": "ORG",
+      "count": 3
+    },
+    {
+      "entity": "French",
+      "label": "NORP",
+      "count": 3
+    },
+    {
+      "entity": "Germany",
+      "label": "GPE",
+      "count": 3
+    },
+    {
+      "entity": "Immich",
+      "label": "PERSON",
+      "count": 3
+    },
+    {
+      "entity": "MB",
+      "label": "ORG",
+      "count": 3
+    },
+    {
+      "entity": "Nintendo",
+      "label": "ORG",
+      "count": 3
+    },
+    {
+      "entity": "OpenAI",
+      "label": "ORG",
+      "count": 3
+    },
+    {
+      "entity": "Sony",
+      "label": "ORG",
+      "count": 3
+    },
+    {
+      "entity": "US",
+      "label": "GPE",
+      "count": 3
+    },
+    {
+      "entity": "AirFanta 3Pro",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "CLI",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "CVE",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "Canada",
+      "label": "GPE",
+      "count": 2
+    },
+    {
+      "entity": "Chicago",
+      "label": "GPE",
+      "count": 2
+    },
+    {
+      "entity": "Claude",
+      "label": "PERSON",
+      "count": 2
+    },
+    {
+      "entity": "Cloudflare",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "Copilot",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "DNSSEC",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "England",
+      "label": "GPE",
+      "count": 2
+    },
+    {
+      "entity": "Europe",
+      "label": "LOC",
+      "count": 2
+    },
+    {
+      "entity": "Germans",
+      "label": "NORP",
+      "count": 2
+    },
+    {
+      "entity": "IP",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "Indonesian",
+      "label": "NORP",
+      "count": 2
+    },
+    {
+      "entity": "Kimi",
+      "label": "PERSON",
+      "count": 2
+    },
+    {
+      "entity": "LLM",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "Lina Khan",
+      "label": "PERSON",
+      "count": 2
+    },
+    {
+      "entity": "Microsoft",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "Rand",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "Russian",
+      "label": "NORP",
+      "count": 2
+    },
+    {
+      "entity": "Trump",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "UI",
+      "label": "ORG",
+      "count": 2
+    },
+    {
+      "entity": "UK",
+      "label": "GPE",
+      "count": 2
+    },
+    {
+      "entity": "Windows Server",
+      "label": "LOC",
+      "count": 2
+    },
+    {
+      "entity": "Zuckerberg",
+      "label": "PERSON",
+      "count": 2
+    },
+    {
+      "entity": "apps",
+      "label": "PERSON",
+      "count": 2
+    },
+    {
+      "entity": "k8s",
+      "label": "PERSON",
+      "count": 2
+    },
+    {
+      "entity": "'Spelling reform'",
+      "label": "WORK_OF_ART",
+      "count": 1
+    },
+    {
+      "entity": "200k",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "AFAICT",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Afghanistan",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "Ai",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Alter Ego",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Amazon",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Amazon/AWS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "America",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "Android",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Antonio",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Astra",
+      "label": "LAW",
+      "count": 1
+    },
+    {
+      "entity": "Astral",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "BS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Blu-Ray",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Bottlecapai",
+      "label": "PRODUCT",
+      "count": 1
+    },
+    {
+      "entity": "Brain",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Brandon Johnson",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Broad Street",
+      "label": "FAC",
+      "count": 1
+    },
+    {
+      "entity": "Brotli Decoder Vulnerability",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Butlerian",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "C++",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "C++",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "CA",
+      "label": "WORK_OF_ART",
+      "count": 1
+    },
+    {
+      "entity": "CFAA",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "CPU",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "California Despite Billionaires' Tax Measure",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Celts/Gaelic",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Chicago Transit Authority",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Claude Code",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "ClickBench",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Clickhouse",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Colossus",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Conway",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Cosmo",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Covid",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Credit-Abuse Scoring",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Crystal",
+      "label": "LOC",
+      "count": 1
+    },
+    {
+      "entity": "Crystal",
+      "label": "PRODUCT",
+      "count": 1
+    },
+    {
+      "entity": "Cursor",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "DNS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "DOGE",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "DOS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "DeLorean",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "DeepSeek R1",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Dessa",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Dilemmas",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Discord",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Docker",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Docker",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Docs",
+      "label": "PRODUCT",
+      "count": 1
+    },
+    {
+      "entity": "Dune",
+      "label": "PRODUCT",
+      "count": 1
+    },
+    {
+      "entity": "Dynamite Headdy >",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "EGA/CGA",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "ESL",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "EU",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "English",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "Firefox",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "Firefox",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Fortune 5",
+      "label": "EVENT",
+      "count": 1
+    },
+    {
+      "entity": "Frank Herbert's",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Frontier Imperative",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "GDPR",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "GPT-3",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "GUI",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Gemini",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "Gemma",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "GeoEye",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "German",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "Germanic",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "Google Docs",
+      "label": "PRODUCT",
+      "count": 1
+    },
+    {
+      "entity": "Google Drive and/or",
+      "label": "FAC",
+      "count": 1
+    },
+    {
+      "entity": "Googles",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Greek",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "HUMINT",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Hackintosh",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Hyper",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "IMHO",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "IO",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "IPMI",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "IPO",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "ISS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Immobilie",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "Indonesia",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "JB Pritzker",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Japanese",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "Jobs",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "John Snow",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Johnson",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Kevin Bacon",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Kimi K3",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Kobo",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "LOT",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "LTS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Landsat",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Latin",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "Laurie Spiegel",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Lawrence Reed",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Leave California",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Lifetime",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Linux",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Linux (Debian) & Docker",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "LoRA",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "London",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "M1 Max",
+      "label": "PRODUCT",
+      "count": 1
+    },
+    {
+      "entity": "MA",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "MCP",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "MacRumors",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Macs",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Malaria Parasite Caught",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Mark Zuckerberg",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Mark Zuckerberg Agrees",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Mark Zuckerberg Pushed Meta",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Mavelle",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Meta’s Board Cut Him a Deal",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "NAS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "NIST",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Navier",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Navier-Stoked",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Norse",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Northern Vietnamese",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "OSS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "OpenAI",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "OpenAI",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "OpenRouter",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Password",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Pixel",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Pokémon",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Practitioners Have Mixed Feelings",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Privacy Meridian",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Pynchon",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "RAM",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Reed",
+      "label": "LAW",
+      "count": 1
+    },
+    {
+      "entity": "Reed",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Running Immich",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Russians",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "Rust",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "SAP",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "SDL",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "SELinux",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "SMS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "SSD",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Scampi Mission Launches",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Scott Pilgrim",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Scratch",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Sega Genesis",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Setting Woman Afire",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Shah Ruh Khan",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Shit",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Sneakernet",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Snow",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Social Market Economy",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Software Development Has Changed Forever In The AI Era",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Soho",
+      "label": "LOC",
+      "count": 1
+    },
+    {
+      "entity": "Sol",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Sonic",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Sonic X",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Southern Vietnamese",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "Space Age",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Spirit",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Stormfront",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Street View",
+      "label": "FAC",
+      "count": 1
+    },
+    {
+      "entity": "TLD",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "TLS",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "TODO",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Taler",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "The Big Short",
+      "label": "LOC",
+      "count": 1
+    },
+    {
+      "entity": "The Butlerian Jihad",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "The Forbin Project",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "The Manhattan Project",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "The Nerd Reich",
+      "label": "WORK_OF_ART",
+      "count": 1
+    },
+    {
+      "entity": "The One Question I Can't Stand at",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Theils and Elons of the world",
+      "label": "WORK_OF_ART",
+      "count": 1
+    },
+    {
+      "entity": "Titans",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "Token",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "Tom Cruise",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Trump",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Trumpism",
+      "label": "WORK_OF_ART",
+      "count": 1
+    },
+    {
+      "entity": "Twelve Years",
+      "label": "WORK_OF_ART",
+      "count": 1
+    },
+    {
+      "entity": "Twitter",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "USSR",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "VGA",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "VRAM",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "Vantor WorldView",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "Vietnamese",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "Weight 2023",
+      "label": "WORK_OF_ART",
+      "count": 1
+    },
+    {
+      "entity": "YT Music",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "YouAreAnIdiot",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "YouTube",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "YouTube",
+      "label": "PRODUCT",
+      "count": 1
+    },
+    {
+      "entity": "anecdata",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "canada",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "carney",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "conservatives",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "https://en.wikipedia.org/wiki/Bernie_Houghton",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "https://news.ycombinator.com/item?id=50069499",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "https://news.ycombinator.com/item?id=50191129 WSJ",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "https://news.ycombinator.com/item?id=50193581 Wired",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "https://plotly.com/blog/kimi-k3-1-pro-plotly-data-analytics-",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "https://www.reddit.com/r/iPhoneDuo/comments/1xday9i/iphone_d",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "iPad",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "iPhones",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "key.codeif",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "kimik2.5 flash",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "kushner",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "max",
+      "label": "PERSON",
+      "count": 1
+    },
+    {
+      "entity": "microsoft",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "node",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "non-Nintendo",
+      "label": "NORP",
+      "count": 1
+    },
+    {
+      "entity": "n’t",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "prefetch.fp",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "the AirFanta 3Pro",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "the British Isles",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "the Clark/Lake CTA",
+      "label": "FAC",
+      "count": 1
+    },
+    {
+      "entity": "the Future of AI",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "the InnerTube API",
+      "label": "LAW",
+      "count": 1
+    },
+    {
+      "entity": "the State of Illinois Thompson Center",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "the State of Illinois'",
+      "label": "GPE",
+      "count": 1
+    },
+    {
+      "entity": "the Switch 2",
+      "label": "PRODUCT",
+      "count": 1
+    },
+    {
+      "entity": "the Thompson Center",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "un",
+      "label": "ORG",
+      "count": 1
+    },
+    {
+      "entity": "~5W",
+      "label": "ORG",
+      "count": 1
+    }
+  ]
+}

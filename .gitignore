@@ -1,0 +1,56 @@
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.uv-cache/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# Spark
+spark-tmp/
+checkpoints/
+**/checkpoints/
+.derby/
+
+# Runtime data
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.log
+*.log.*
+backups/
+
+# AG News and fitted models
+data/ag_news/
+models/
+
+# Local Docker data
+docker-data/
+
+# Raw generated datasets
+data/*.jsonl
+experiments/*/data/
+experiments/*/logs/
+
+# Generated Spark output
+outputs/part2/all_predictions/
+outputs/part2/five_per_class/
+outputs/part2/hand_label_50/
+
+# Local file backups
+*.bak
+
+# OS / editor files
+.DS_Store
+.idea/
+.vscode/

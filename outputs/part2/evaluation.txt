@@ -1,0 +1,25 @@
+Total hand-labeled: 50
+None of these: 6
+Four-class eligible: 44
+Correct within four classes: 34
+Hand-check accuracy: 77.27%
+
+Misclassified messages:
+human=Sci/Tech predicted=Sports :: Ai is bringing out naked dualism and magical supernatural thinking in a lot of otherwise reasonable people.
+human=Sci/Tech predicted=Sports :: Nobody is stopping you from taking apart your iPhone and using AI to reverse engineer it and run custom software. Apple has made it as difficult as they can, but they haven't made 
+human=World predicted=Sci/Tech :: The fact is this political system of ours is heavily balanced in favor of those with the endless budgets and resources to spend engaging in "democratic" avenues of influence.
+human=World predicted=Sci/Tech :: Agree, all of them in same industry mostly have similar posters. My eyes keep ignoring them and focus on service quality of barbershop and restaurants.
+human=Sci/Tech predicted=Business :: Nope, not thanking you now or later. 1) It is an insane bloat if you just want that one feature. 2) There is no CLI, just GUI.
+human=World predicted=Sports :: The good thing about voting is that not everyone needs to be right. The average vote is always far more accurate than any individual vote.
+human=World predicted=Sports :: I think this is a geopolitical question beyond any cabinet or chair. In general, I think it would surprise people, but a Democratic cabinet would have to do many of the same geopol
+human=Business predicted=Sports :: But thoughtfulness and nuance gets in the way of my tirades that it’s all a marketing stunt!
+human=World predicted=Sci/Tech :: This is a bad thing. Imagin how huge the attack surface is
+human=World predicted=Sports :: Nobody should be punished for working more than 8 hours a day 5 days a week either.
+
+Messages labeled None:
+predicted=Sci/Tech :: Au contraire, you see, I can live quite nicely in a 1,000-square-foot apartment, but I need about 1,500 square feet of garage space for my hobby support, places to put my tools whe
+predicted=World :: Irrelevant
+predicted=World :: How does this handle modern art which is very incompressible too? If we take your hypothesis then one could say modern art isn't good, which some do say.
+predicted=Sports :: Eng Mgt
+predicted=Sports :: I think it's more that agents gaslight you to believing that timezone from Baker Island and Howland Island is most important issue ever and needs that 1k exception.
+predicted=Sci/Tech :: In medicine if you fuck around waiting to "empirically determine" what is wrong you might be risking someone's death. So you treat the horses. :/
