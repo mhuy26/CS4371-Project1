@@ -29,7 +29,7 @@ services:
       KAFKA_LOG_DIRS: /var/lib/kafka/data
 
     volumes:
-      - /mnt/storage2/cs4371-work/docker-data/kafka:/var/lib/kafka/data
+      - ${GP1_DATA_DIR:-./docker-data}/kafka:/var/lib/kafka/data
 
     mem_limit: 1200m
 

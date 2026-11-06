@@ -47,7 +47,7 @@ services:
       - "127.0.0.1:9200:9200"
 
     volumes:
-      - /mnt/storage2/cs4371-work/docker-data/elasticsearch:/usr/share/elasticsearch/data
+      - ${GP1_DATA_DIR:-./docker-data}/elasticsearch:/usr/share/elasticsearch/data
 
     mem_limit: 2g
 
