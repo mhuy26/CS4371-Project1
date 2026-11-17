@@ -1,4 +1,3 @@
-
 """CS4371 Group Project 1 - Part 2: Batch text classification.
 
 Loads the trained AG News model, classifies Hacker News messages,

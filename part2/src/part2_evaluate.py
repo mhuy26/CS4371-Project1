@@ -1,4 +1,3 @@
-
 """Evaluate independently hand-labeled 50-row CSV."""
 
 import argparse

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """CS4371 GP1: resumable Hacker News -> SQLite -> (optional Kafka) -> JSONL.
 
 Default behavior matches Part 1 (Kafka delivery, export acknowledged messages).

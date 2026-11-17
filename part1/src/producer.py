@@ -1,5 +1,3 @@
-
-#!/usr/bin/env python3
 """
 CS4371 Group Project 1
 Hacker News -> SQLite -> Kafka
