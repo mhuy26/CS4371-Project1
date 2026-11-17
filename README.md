@@ -3,7 +3,7 @@ This project analyzes Hacker News stories and comments using two pipelines: Part
 
 ## Start here: what this guide runs
 
-Follow Sections 1–8 in order. The default workflow uses the **committed 60-minute snapshots, exported Kibana dashboard, fitted AG News model, original batch prediction CSVs and manual labels**. No model retraining, new offline batch job, or 60-minute data collection is required. The only new collection is a short, two-minute Part 2 live demonstration.
+Follow Sections 1–8 in order. Choose your operating system in each platform-specific block; unlabeled commands apply to Linux, macOS and Windows (Ubuntu WSL 2). The default workflow uses the **committed 60-minute snapshots, exported Kibana dashboard, fitted AG News model, original batch prediction CSVs and manual labels**. No model retraining, new offline batch job, or 60-minute data collection is required. The only new collection is a short, two-minute Part 2 live demonstration.
 
 The appendices at the very bottom are independent, optional procedures for readers who want to repeat expensive experiments or training. Do not execute them as part of the default workflow.
 
@@ -29,7 +29,7 @@ The offline batch predictions are not inputs to the live classifier. Both classi
 
 ### 2.1 Choose your operating system
 
-The original project was tested on Ubuntu with Python 3.14, Java 21, PySpark 4.1.3, Kafka 4.1.2 and Elastic Stack 9.5.5. The following are installation paths for different operating systems; native macOS and Windows/WSL execution have not been independently tested.
+The original project and the default reproduction workflow were tested on Ubuntu with Python 3.14, Java 21, PySpark 4.1.3, Kafka 4.1.2 and Elastic Stack 9.5.5. The following are installation paths for different operating systems; native macOS and Windows/WSL execution have not been independently tested.
 
 - **Linux:** Use Bash and Docker Engine with Compose v2.
 - **macOS:** Use Terminal (Bash or zsh) and Docker Desktop for your CPU architecture. If dependencies or images are unavailable for Apple Silicon, use a compatible Linux VM or remote Linux machine.
@@ -154,17 +154,32 @@ Expected: a valid Python 3.14 executable path. uv may reuse an existing compatib
 
 ### 2.6 Final prerequisite check
 
+**All platforms:**
+
 ```bash
 git --version
 uv --version
 uv python find 3.14
 java -version
-docker info
 docker compose version
 tmux -V
 ```
 
-Expected: all commands succeed, Java reports version 21, and `docker info` shows a running daemon. The commands below assume Docker access without sudo. On Linux, if only `sudo docker info` works, configure Docker access following official guidance or use sudo for the explicit Docker commands; the optional Bash experiment runner itself requires ordinary Docker access. Docker daemon access is privileged. Do not change socket permissions to make it accessible to everyone.
+**Linux (native Docker Engine):**
+
+```bash
+sudo docker info
+```
+
+**macOS / Windows (Ubuntu WSL 2 with Docker Desktop):**
+
+```bash
+docker info
+```
+
+Expected: Java 21, Python 3.14 available through uv, and Docker Client and Server information. Start Docker Desktop before checking on macOS or Windows. On Windows, enable integration for your Ubuntu WSL distribution.
+
+Native Linux commands use `sudo` for Docker daemon access, as in the tested Ubuntu setup. Docker Desktop commands run as the current user. Do not change Docker socket permissions. The optional experiment runner has a separate Docker access requirement in Appendix A.
 
 ## 3. Clone and configure the project
 
@@ -206,7 +221,7 @@ Expected: PySpark 4.1.3, spaCy 3.8.16 and kafka-python 3.0.11 in the original lo
 
 ```bash
 cp .env.example .env
-mkdir -p docker-data spark-tmp
+mkdir -p docker-data/kafka docker-data/elasticsearch spark-tmp
 export SPARK_LOCAL_IP=127.0.0.1
 export SPARK_LOCAL_DIRS="$PWD/spark-tmp"
 ```
@@ -228,9 +243,62 @@ Expected: four historical snapshots (15, 30, 45, 60 minutes), the exported dashb
 
 ## 4. Start and verify Docker infrastructure
 
-### 4.1 Start the services
+### 4.1 Prepare storage and start the services
 
-**Where:** Project terminal, repository root. On a machine already running another Kafka/Elastic stack, first resolve port and Compose project-name conflicts. Do not stop unrelated services.
+**Where:** Project terminal, repository root (Ubuntu WSL terminal on Windows).
+
+On a fresh installation, prepare the bind-mounted directories before starting Docker. The following blocks assume `GP1_DATA_DIR=./docker-data` and the directories created in Section 3.3. If you changed that setting, create and use the corresponding directories instead.
+
+**Linux (native Docker Engine):**
+
+```bash
+sudo chown 1000:1000 docker-data/kafka
+sudo chown 1000:0 docker-data/elasticsearch
+sudo chmod u+rwX,g+rwX docker-data/kafka docker-data/elasticsearch
+ls -ldn docker-data/kafka docker-data/elasticsearch
+```
+
+Expected: Kafka ownership `1000:1000`, Elasticsearch ownership `1000:0`. This prevents the startup `AccessDeniedException` observed during the clean-clone test. Apply these commands only to the new project's own directories. If you changed `GP1_DATA_DIR`, use the corresponding paths. 
+
+**macOS (Docker Desktop):** Section 3.3 creates the directories as your user. No manual Linux UID/GID changes are normally needed. Keep the repository in a Docker Desktop shared location and leave Docker Desktop running.
+
+**Windows (Ubuntu WSL 2 + Docker Desktop):** Keep the repository inside the Ubuntu filesystem, not `/mnt/c`. For these Linux-filesystem bind mounts, prepare the container ownership as follows:
+
+```bash
+sudo chown 1000:1000 docker-data/kafka
+sudo chown 1000:0 docker-data/elasticsearch
+sudo chmod u+rwX,g+rwX docker-data/kafka docker-data/elasticsearch
+ls -ldn docker-data/kafka docker-data/elasticsearch
+```
+
+Docker Desktop itself runs without `sudo` in WSL. These storage preparation steps are platform guidance; only native Ubuntu has been tested.
+
+Check for existing containers before starting:
+
+**Linux (native Docker Engine):**
+
+```bash
+sudo docker ps -a --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
+```
+
+**macOS / Windows (Ubuntu WSL 2 with Docker Desktop):**
+
+```bash
+docker ps -a --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
+```
+
+If another copy of this project exists, stop here and resolve both the Compose project name and ports (9092, 9200, 5601) before proceeding. Do not start a second clone under the original `cs4371-gp1` project name. For a separate test stack, use a unique `COMPOSE_PROJECT_NAME` in `.env`, a separate data directory, and free those host ports by stopping only the original project services from its own directory. If the project name changes, substitute the corresponding container names in the commands below. Do not stop unrelated services or delete volumes.
+
+Start the services:
+
+**Linux (native Docker Engine):**
+
+```bash
+sudo docker compose -f docker-compose.yml -f docker-compose.elastic.yml config --quiet
+sudo docker compose -f docker-compose.yml -f docker-compose.elastic.yml up -d
+```
+
+**macOS / Windows (Ubuntu WSL 2 with Docker Desktop):**
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.elastic.yml config --quiet
@@ -241,11 +309,28 @@ Expected: Kafka, Elasticsearch, Kibana and Logstash start. Allocate sufficient R
 
 ### 4.2 Verify the infrastructure
 
+**Linux (native Docker Engine):**
+
+```bash
+sudo docker compose -f docker-compose.yml -f docker-compose.elastic.yml ps
+```
+
+**macOS / Windows (Ubuntu WSL 2 with Docker Desktop):**
+
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.elastic.yml ps
 ```
 
 Expected: all four containers show `Up`. Check Kafka directly inside its container:
+
+**Linux (native Docker Engine):**
+
+```bash
+sudo docker exec cs4371-gp1-kafka-1 /opt/kafka/bin/kafka-topics.sh \
+  --bootstrap-server localhost:19092 --list
+```
+
+**macOS / Windows (Ubuntu WSL 2 with Docker Desktop):**
 
 ```bash
 docker exec cs4371-gp1-kafka-1 /opt/kafka/bin/kafka-topics.sh \
@@ -268,6 +353,14 @@ curl -I http://127.0.0.1:5601
 
 Expected: HTTP response after Kibana finishes initialization. Inspect Logstash startup:
 
+**Linux (native Docker Engine):**
+
+```bash
+sudo docker logs --tail 60 cs4371-gp1-logstash-1
+```
+
+**macOS / Windows (Ubuntu WSL 2 with Docker Desktop):**
+
 ```bash
 docker logs --tail 60 cs4371-gp1-logstash-1
 ```
@@ -286,13 +379,16 @@ ls -lh experiments/run01/snapshots/
 
 Expected: `entities_15min.json`, `entities_30min.json`, `entities_45min.json`, `entities_60min.json`.
 
-On a fresh Elasticsearch stack, use the repository's historical snapshot importer to index the four JSON files in `cs4371-entities-history-run01`. First inspect its actual CLI:
+Import the four saved snapshots into the historical index:
 
 ```bash
-uv run --no-sync python part1/src/import_snapshots.py --help
+uv run --no-sync python part1/src/import_snapshots.py \
+  --snapshot-dir experiments/run01/snapshots \
+  --es-url http://localhost:9200 \
+  --index cs4371-entities-history-run01
 ```
 
-**Documentation verification gap:** the exact importer arguments have not been confirmed against the current repository source. Use the displayed arguments for the snapshot location, historical index, and Elasticsearch endpoint (`http://localhost:9200`); if the importer accepts a run ID, use `run01`. The importer must preserve the historical timestamps and `elapsed_minutes` values. Do not substitute the general live entity index. No new 60-minute experiment is required. This is the one main-path command that still needs an exact verified invocation before the guide can be considered fully copy-and-run.
+Expected: four snapshots imported, totaling 845 historical entity records (149, 191, 233 and 272 records at the respective intervals). No new 60-minute experiment is required.
 
 After the import, verify the index:
 
@@ -300,7 +396,7 @@ After the import, verify the index:
 curl -fsS 'http://127.0.0.1:9200/cs4371-entities-history-run01/_count?pretty'
 ```
 
-Expected: a nonzero count (845 documents were observed in the restored original historical index). If the index is missing or empty, resolve the importer step before proceeding to the dashboard.
+Expected: `count: 845`. If the index is missing or empty, resolve the importer step before proceeding to the dashboard.
 
 ### 5.2 Import the saved Kibana dashboard
 
@@ -312,7 +408,7 @@ curl -fsS -X POST 'http://127.0.0.1:5601/api/saved_objects/_import' \
   --form file=@config/kibana-dashboard.ndjson
 ```
 
-Expected: JSON reporting successful import. On an existing stack with conflicting saved objects, inspect the conflicts rather than overwriting existing dashboards blindly. The NDJSON contains saved dashboard and data-view definitions, not the underlying Elasticsearch documents.
+Expected: `"success": true`, `"successCount": 3`. If the import reports conflicts in a dedicated reproduction instance, repeat the same command with `?overwrite=true` appended to the URL. Do not overwrite saved objects in an unrelated instance. The NDJSON contains saved dashboard and data-view definitions, not the underlying Elasticsearch documents.
 
 ### 5.3 Open Kibana and view the charts
 
@@ -324,7 +420,7 @@ If the project is on a remote machine, use a **separate terminal on your client 
 ssh -N -L 5601:127.0.0.1:5601 USER@HOST
 ```
 
-In Kibana, go to **Dashboards → CS4371 GP1 — Historical Entity Frequencies**. Set an absolute date range from October 1 to November 15, 2026 if needed and refresh. The four panels show the top ten entity names by sum of count, filtered by `elapsed_minutes` 15, 30, 45 and 60.
+In Kibana, go to **Dashboards → CS4371 GP1 — Historical Entity Frequencies**. Set an absolute date range from October 23, 2026 00:00 through October 24, 2026 23:59 if needed and refresh. The four panels show the top ten entity names by sum of count, filtered by `elapsed_minutes` 15, 30, 45 and 60.
 
 Expected historical result:
 
@@ -350,25 +446,7 @@ Expected: `metadata` and `stages`. Use this model for the rest of the guide. It 
 ### 6.2 Inspect the original batch predictions
 
 ```bash
-wc -l data/part2_combined.jsonl
-uv run --no-sync python - <<'PYCODE'
-import csv
-from collections import Counter
-from pathlib import Path
-counts = Counter()
-examples = []
-for path in sorted(Path('outputs/part2/all_predictions').glob('part-*.csv')):
-    with path.open(newline='', encoding='utf-8') as f:
-        for row in csv.DictReader(f):
-            counts[row['predicted_class']] += 1
-            if len(examples) < 3:
-                examples.append(row)
-for name in ('World', 'Sports', 'Business', 'Sci/Tech'):
-    print(name, counts[name])
-print('Total:', sum(counts.values()))
-for row in examples:
-    print(row['text'][:120], row['predicted_class'], row['predicted_probability'])
-PYCODE
+uv run --no-sync python part2/src/part2_inspect.py
 ```
 
 Expected: 1,165 predictions and example texts with category and probability.
@@ -397,8 +475,23 @@ Expected: 50 manually reviewed, 6 outside the four categories, 44 eligible, 34 c
 
 **Where:** Project terminal outside tmux. This example uses the ID `part2-repro01` for a first run. If reusing a machine, use a fresh ID consistently in all commands to avoid accumulating previous counts.
 
+**All platforms:**
+
 ```bash
 mkdir -p experiments/part2-repro01/checkpoint
+```
+
+**Linux (native Docker Engine):**
+
+```bash
+sudo docker exec cs4371-gp1-kafka-1 /opt/kafka/bin/kafka-topics.sh \
+  --bootstrap-server localhost:19092 --create \
+  --topic topic1-part2-repro01 --partitions 1 --replication-factor 1
+```
+
+**macOS / Windows (Ubuntu WSL 2 with Docker Desktop):**
+
+```bash
 docker exec cs4371-gp1-kafka-1 /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:19092 --create \
   --topic topic1-part2-repro01 --partitions 1 --replication-factor 1
@@ -406,19 +499,27 @@ docker exec cs4371-gp1-kafka-1 /opt/kafka/bin/kafka-topics.sh \
 
 Expected: `Created topic topic1-part2-repro01.` If it already exists, choose another fresh ID and use it throughout Section 7. The new database, JSONL and checkpoint paths are separate from committed files.
 
-### 7.2 Start tmux Window 0 — classifier
+### 7.2 Start tmux — Window 0 (classifier)
 
-**Where:** Same project terminal. Java and uv should already be configured in this shell from Section 2.
+**Where:** Project terminal, repository root, outside tmux. Java and uv must be configured as in Section 2.
 
 ```bash
 tmux new-session -s part2-repro -n classifier
 ```
 
-Expected: tmux opens with `0:classifier*` in the status bar. If using a new shell where Java or uv are no longer configured, apply the platform-specific exports in Step 2.4 before starting Spark.
+Check the status bar at the bottom:
 
-**Where:** Inside Window 0 (`classifier`), repository root.
+```text
+[part2-repro] 0:classifier*
+```
+
+- `0:classifier` = Window 0, the classifier window.
+- `*` = the window you are currently viewing.
+
+**Stay in Window 0 (`classifier*`).** Run:
 
 ```bash
+export PATH="$HOME/.local/bin:$JAVA_HOME/bin:$PATH"
 export SPARK_LOCAL_IP=127.0.0.1
 export SPARK_LOCAL_DIRS="$PWD/spark-tmp"
 uv run --no-sync python part2/src/part2_stream.py \
@@ -429,22 +530,33 @@ uv run --no-sync python part2/src/part2_stream.py \
   --trigger-seconds 10 --from-earliest
 ```
 
-Expected: Spark initializes, loads the model and announces streaming classification. It should stay running. Do not proceed if a traceback returns you to the shell prompt. `--from-earliest` applies when there is no previous checkpoint. No counts are required before the producer sends data.
+Expected: Spark loads the model and starts streaming. Leave it running. If it exits with a traceback, fix the error before continuing.
 
-### 7.3 Create and enter Window 1 — producer
+### 7.3 Create and enter Window 1 (producer)
 
-While Spark runs in Window 0, press **Ctrl+B**, release both keys, then press **C**. This opens Window 1 and leaves the classifier running. In the new window, run:
+**Where:** Window 0, while Spark is running.
+
+1. Press `Ctrl+B`.
+2. Release both keys.
+3. Press `c`.
+
+A new window opens. Run:
 
 ```bash
 tmux rename-window producer
-tmux list-windows
 ```
 
-Expected: `0:classifier-` and `1:producer*`. The asterisk marks the active window. If you accidentally detached, run `tmux attach -t part2-repro` from the normal terminal, then press Ctrl+B followed by 1 to enter the producer window. Do not create a second classifier.
+Check the status bar:
+
+```text
+[part2-repro] 0:classifier- 1:producer*
+```
+
+`producer*` means you are now in Window 1. Window 0 continues running. Switching windows does not stop either process.
 
 ### 7.4 Start the producer
 
-**Where:** Window 1 (`producer`), repository root. Verify `pwd` if needed; if uv is unavailable in this new shell, restore its PATH as in Step 2.3.
+**Where:** Window 1 (`producer*`), repository root. If uv is not found, run `export PATH="$HOME/.local/bin:$PATH"`.
 
 ```bash
 uv run --no-sync python part1/src/producer.py \
@@ -455,29 +567,85 @@ uv run --no-sync python part1/src/producer.py \
   --output experiments/part2-repro01/messages.jsonl
 ```
 
-Expected: the producer retrieves live Hacker News stories and comments and publishes messages to the same Kafka topic as the classifier. Duration is two minutes; polling interval must be at least five seconds. `--max-items` configures the producer's item limit; do not interpret it as a guaranteed total message count. Output and database paths isolate this demo from the committed datasets.
+Expected: messages are published to Kafka for two minutes. The polling interval is five seconds; `--max-items` is not a guaranteed total message count. The demo uses separate database and output files.
 
-### 7.5 View live classification
+### 7.5 Return to Window 0 and watch live classification
 
-While Window 1 runs, press **Ctrl+B**, release, then **0**. You are now in Window 0 (`classifier`). Spark should print tables containing `predicted_class` and `count`, with `Batch: N` headings. These are live streaming micro-batches, not the offline batch classification job. Counts are cumulative within this checkpoint. Observe the table changing as messages arrive.
+**Where:** Window 1, while the producer is running.
 
-### 7.6 Finish and stop the demo
+1. Press `Ctrl+B`.
+2. Release both keys.
+3. Press `0` (zero).
 
-Press **Ctrl+B**, then **1** to return to Window 1. Let the producer finish automatically and return to its shell prompt. Note its delivered-message total. Press **Ctrl+B**, then **0** to return to the classifier. Allow Spark to process the remaining Kafka backlog and capture the final visible classification table. Only then press **Ctrl+C** in Window 0. The classifier otherwise waits indefinitely for more messages; Kafka does not signal producer completion to Spark.
+Check the status bar:
 
-The original demonstration displayed cumulative counts of World 51, Sports 67, Business 119 and Sci/Tech 431 (668 total) using a reused topic/checkpoint. These are not expected counts for a new two-minute run. Verify delivered messages versus committed Spark progress and Kafka end offsets before claiming full consumption. Empty text is filtered, so delivered counts and classified counts may differ. A Ctrl+C Py4J traceback was observed after successful output in the original demonstration; check the process has exited rather than claiming a clean shutdown from the traceback alone.
+```text
+[part2-repro] 0:classifier* 1:producer-
+```
 
-From the Window 0 shell prompt, run:
+You are now in Window 0. Watch the `Batch: N` tables with `predicted_class` and `count`. These are streaming micro-batches, with cumulative category counts updated as new messages arrive.
+
+### 7.6 Wait for the producer to finish
+
+**Where:** Window 0.
+
+1. Press `Ctrl+B`.
+2. Release both keys.
+3. Press `1`.
+
+Check that `1:producer*` is active. Wait until the producer finishes automatically and returns to the shell prompt. Note its delivered-message total. Do not press Ctrl+C here.
+
+### 7.7 Stop the classifier
+
+**Where:** Window 1, after the producer finishes.
+
+1. Press `Ctrl+B`.
+2. Release both keys.
+3. Press `0`.
+
+Check that `0:classifier*` is active. Allow remaining micro-batches to finish and record the last counts. Verify Spark progress against Kafka end offsets before claiming every message was consumed; empty text is filtered.
+
+Press `Ctrl+C` **in Window 0** to stop the classifier. Spark otherwise waits indefinitely for future Kafka messages, even after the producer exits.
+
+Expected: the shell prompt returns. A Py4J traceback may occur during interruption; it does not invalidate previously completed batches.
+
+Verify the processes have stopped.
+
+**Linux / Windows (Ubuntu WSL 2):**
 
 ```bash
 pgrep -af '[p]art2_stream.py|[p]roducer.py'
 ```
 
-Expected: no demo producer/classifier processes (on macOS use `pgrep -fl 'part2_stream.py|producer.py'` if `-a` is unsupported). Other unrelated processes should not be stopped. Press Ctrl+B then D to detach when finished.
+**macOS:**
+
+```bash
+pgrep -fl '[p]art2_stream.py|[p]roducer.py'
+```
+
+Expected: no demo processes. Do not stop unrelated processes.
+
+Detach from tmux:
+
+1. Press `Ctrl+B`.
+2. Release both keys.
+3. Press `d`.
+
+You are back in the normal terminal. If you detach accidentally during the demo, run `tmux attach -t part2-repro` from the normal terminal and use the status bar to identify the active window.
+
+For reference, the original demonstration displayed World 51, Sports 67, Business 119 and Sci/Tech 431 (668 total) using a reused checkpoint. A fresh demo will have different counts.
 
 ## 8. Completion and shutdown
 
 The default workflow is now complete. Original Part 1 charts, saved Part 2 offline predictions, the original manual evaluation, and a new short streaming demonstration are the intended evidence. To stop only this project's Docker services after the demonstration, run from the repository root:
+
+**Linux (native Docker Engine):**
+
+```bash
+sudo docker compose -f docker-compose.yml -f docker-compose.elastic.yml stop
+```
+
+**macOS / Windows (Ubuntu WSL 2 with Docker Desktop):**
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.elastic.yml stop
@@ -489,7 +657,8 @@ This preserves volumes and data. Do not run `down -v` or delete historical snaps
 
 - The original project and live demos were executed successfully on Ubuntu.
 - GitHub synchronization, a fresh repository clone, installed dependencies, the lock file, and committed datasets/model/predictions/dashboard were verified.
-- A complete clean-environment execution, the exact snapshot importer invocation, independent dashboard restoration, and native macOS/Windows execution have not been verified.
+- On November 16, 2026, the default workflow was reproduced from a fresh GitHub clone on Ubuntu: Docker startup after permission fixes, import of 845 historical records and three Kibana saved objects, matching historical charts, and live Part 2 classification with the supplied model.
+- The optional 60-minute rerun and model retraining were not repeated in this test. Native macOS and Windows/WSL execution remain unverified.
 - Historical results are fixed artifacts; new Hacker News streams vary over time. The preserved model and input dataset are the basis for comparing offline predictions. No accuracy claim is made for the new unlabelled live stream.
 
 ### Troubleshooting
@@ -500,6 +669,8 @@ This preserves volumes and data. Do not run `down -v` or delete historical snaps
 | `JAVA_GATEWAY_EXITED` | Verify Java 21 and `JAVA_HOME` in the classifier shell. |
 | Missing spaCy model | Repeat the model installation in Step 3.2. |
 | Checkpoint mkdir failure | Use a writable relative checkpoint directory and create it before starting Spark. |
+| Docker socket permission denied | Use the platform-specific Docker block in Step 2.6; on Docker Desktop verify the daemon and WSL integration. |
+| Kafka or Elasticsearch data permission denied | Linux/WSL: verify ownership in Step 4.1. macOS: verify Docker Desktop file sharing and directory access. |
 | Kafka connection refused | Check container status and host port 9092. |
 | Kibana says Configure Elastic | Verify Elasticsearch is running first. |
 | Empty historical panels | Verify imported index, data view and date range. |
@@ -527,7 +698,29 @@ This optional procedure runs the combined experiment runner, so both NER and cla
 
 ### A.1 Run a short test first
 
-**Where:** Project terminal, repository root. Check that `experiments/reproduce01` does not exist before running. Use a different fresh ID if needed. Docker access without sudo is required by the runner.
+**Where:** Project terminal, repository root. Check that `experiments/reproduce01` does not exist before running. Use a different fresh ID if needed. The runner invokes Docker internally without `sudo`. Prepare access before running it.
+
+**Linux (native Docker Engine):** The optional runner requires non-root Docker access. Only on a trusted machine, configure membership in the Docker group (which grants root-equivalent privileges):
+
+```bash
+sudo usermod -aG docker "$USER"
+```
+
+Log out and back in, return to the repository root, restore the Java and uv environment from Section 2, and verify:
+
+```bash
+docker info
+```
+
+Do not run the entire experiment script with `sudo`.
+
+**macOS / Windows (Ubuntu WSL 2 with Docker Desktop):** Start Docker Desktop (enable WSL integration on Windows) and verify:
+
+```bash
+docker info
+```
+
+**All platforms:**
 
 ```bash
 tmux new-session -s gp1-experiment -n runner
@@ -563,9 +756,20 @@ Expected: `entities_15min.json`, `entities_30min.json`, `entities_45min.json`, a
 
 ### A.4 Visualize the new experiment (not the original dashboard)
 
-The current Logstash configuration subscribes to `topic2` and `topic2-run01`; it does not automatically ingest a new `topic2-reproduce60`. For fresh live indexing, adapt the Kafka input subscription and Elasticsearch output routing in `config/logstash.conf` to the new topic and a distinct index, then reload/restart Logstash. Inspect the actual settings first. For historical visualization, use `part1/src/import_snapshots.py --help` to determine the importer flags and import the new snapshot directory into a **separate** historical index. Make a separate data view and dashboard using the panel filters from Step 5.3 and the new collection dates. Do not overwrite the original `run01` index or snapshot directory. Exact importer arguments are the same outstanding documentation gap noted in Step 5.1.
+The current Logstash configuration subscribes to `topic2` and `topic2-run01`; it does not automatically ingest a new `topic2-reproduce60`. For fresh live indexing, adapt the Kafka input subscription and Elasticsearch output routing in `config/logstash.conf` to the new topic and a distinct index, then reload/restart Logstash. Inspect the actual settings first. For historical visualization, import the new snapshots into a separate index:
+
+```bash
+uv run --no-sync python part1/src/import_snapshots.py \
+  --snapshot-dir experiments/reproduce60/snapshots \
+  --es-url http://localhost:9200 \
+  --index cs4371-entities-history-reproduce60
+```
+
+Create a separate data view and dashboard using the panel filters from Step 5.3 and the new collection dates. Do not overwrite the original `run01` index or snapshot directory.
 
 ## Appendix B — Retrain the AG News model
+
+The commands in this optional appendix were not rerun during the November 16 reproduction test. Check the scripts’ `--help` if your checkout differs.
 
 Skip this appendix if you want to use `models/agnews_tfidf_lr`. That is the fitted model used throughout the main workflow.
 
