@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 set -Eeuo pipefail
 
 # CS4371 GP1: one bounded experiment with two concurrent Spark streaming queries.
